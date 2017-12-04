@@ -1,1 +1,18 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<div class="course block">
+  <div class="info">
+    <div class="headerInfo">
+      <div>
+        <h2>{{ title }}</h2>
+        <div>{{ ((duration - duration % 60) ? (duration - duration % 60) / 60 + ' h ':'') + duration % 60  + ' min'}} </div>
+      </div>
+      <div>{{ creationDate | date:'dd/MM/yyyy' }}</div>
+    </div>
+    <div>{{ description }}</div>
+  </div>
+
+  <div class="actions">
+    <button mat-raised-button>Edit cource</button>
+    <button mat-raised-button (click)="onDelete();">Delete</button>
+  </div>
+</div>

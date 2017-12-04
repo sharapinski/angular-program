@@ -1,0 +1,36 @@
+.course {
+    display: flex;
+    padding-bottom: 10px;
+}
+
+.info {
+ width: calc(100% - 100px);
+ margin-right: 10px;
+}
+
+.headerInfo {
+ display: flex;
+ justify-content: space-between;
+ align-items: baseline;
+}
+
+.headerInfo div {
+  display: flex;
+  align-items: baseline;
+}
+
+.headerInfo h2 {
+  margin: 0 20px 10px 0;
+}
+
+.actions {
+ float: right;
+ text-align: right;
+ max-width: 100px;
+ display: block;
+}
+
+.actions button {
+  margin-bottom: 10px;
+  width: 100%;
+}

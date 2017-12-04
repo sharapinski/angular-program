@@ -1,55 +1,96 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ICourse } from './ICourse';
+
 
 @Component({
   selector: 'course',
   templateUrl: './course.component.html',
   styleUrls: ['./course.component.scss']
 })
-export class courseComponent implements ICourse{
-  title: string;
-  order: number;
-  duration: Date;
-  date: Date;
-  description: string;
+export class CourseComponent implements ICourse{
+  @Input('id') id: number;
+  @Input('title') title: string;
+  @Input('duration') duration: number;
+  @Input('date') creationDate: string;
+  @Input('description') description: string;
+
+  @Output("delete") delete = new EventEmitter();
+
+  constructor(){
+    console.log(`course ${this.id}: constructor`);
+  }
+
+  onDelete(): void {
+    this.delete.emit({
+      item: this
+    })
+  }
+
+  getId(): number {
+    return this.id;
+  }
 
   getTitle(): string {
     return this.title;
-  };
-  setTitle(title: string): courseComponent {
+  }
+  setTitle(title: string): CourseComponent {
     this.title = title;
     return this;
-  };
+  }
 
-  getOrder(): number {
-    return this.order;
-  };
-  setOrder(order: number): courseComponent {
-    this.order = order;
-    return this;
-  };
-
-  getDuration(): Date {
+  getDuration(): number {
     return this.duration;
-  };
-  setDuration(duration: Date): courseComponent {
+  }
+
+  setDuration(duration: number): CourseComponent {
     this.duration = duration;
     return this;
-  };
+  }
 
-  getDate(): Date {
-    return this.date;
-  };
-  setDate(date: Date): courseComponent {
-    this.date = date;
-    return this;
-  };
+  getCreationDate(): string {
+    return this.creationDate;
+  }
 
-  getDescription(): string{
+  getDescription(): string {
     return this.description;
-  };
-  setDescription(description: string): courseComponent {
+  }
+
+  setDescription(description: string): CourseComponent {
     this.description = description;
     return this;
-  };
+  }
+
+
+  ngOnInit() {
+    console.log(`course ${this.id}: ngOnInit`);
+  }
+
+  ngOnChanges() {
+    console.log(`course ${this.id}: ngOnChanges`);
+  }
+
+  ngDoCheck() {
+    console.log(`course ${this.id}: ngDoCheck`);
+  }
+
+  ngOnDestroy() {
+    console.log(`course ${this.id}: ngOnDestroy`);
+  }
+  //
+  // ngAfterContentInit() {
+  //   console.log(`course ${this.id}: ngAfterContentInit`);
+  // }
+  //
+  // ngAfterContentChecked() {
+  //   console.log(`course ${this.id}: ngAfterContentChecked`);
+  // }
+  //
+  // ngAfterViewInit() {
+  //   console.log(`course ${this.id}: ngAfterViewInit`);
+  // }
+  //
+  // ngAfterViewChecked() {
+  //   console.log(`course ${this.id}: ngAfterViewChecked`);
+  // }
+
 }
