@@ -1,5 +1,15 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<header></header>
-<search></search>
-<course></course>
-<footer></footer>
+<app-header></app-header>
+<main>
+  <search></search>
+  <section>
+    <course *ngFor="let item of courses"
+      [id]="item.id"
+      [title]="item.title"
+      [date]="item.creationDate"
+      [duration]="item.duration"
+      [description]="item.description"
+      (delete)="onItemDelete(item);"></course>
+  </section>
+</main>
+<app-footer></app-footer>

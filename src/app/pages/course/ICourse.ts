@@ -1,22 +1,18 @@
 export interface ICourse{
+  id: number;
   title: string;
-  order: number;
-  duration: Date;
-  date: Date;
+  duration: number;
+  creationDate: string;
   description: string;
 
-  getTitle(): string;
-  setTitle(title: string): ICourse;
-
-  getOrder(): number;
-  setOrder(order: number): ICourse;
-
-  getDuration(): Date;
-  setDuration(duration: Date): ICourse;
-
-  getDate(): Date;
-  setDate(date: Date): ICourse;
-
-  getDescription(): string;
-  setDescription(description: string): ICourse;
+  // getTitle(): string;
+  // setTitle(title: string): ICourse;
+  //
+  // getDuration(): number;
+  // setDuration(duration: number): ICourse;
+  //
+  // getCreationDate(): Date;
+  //
+  // getDescription(): string;
+  // setDescription(description: string): ICourse;
 }
