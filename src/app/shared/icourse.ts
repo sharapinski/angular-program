@@ -1,9 +1,7 @@
+import { Course } from './course'
+
 export interface ICourse{
-  id: number;
-  title: string;
-  duration: number;
-  creationDate: string;
-  description: string;
+  course: Course;
 
   // getTitle(): string;
   // setTitle(title: string): ICourse;
