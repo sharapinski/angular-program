@@ -11,6 +11,12 @@
 }
 
 
+input {
+  margin-right: 10px;
+  height: 24px;
+}
+
+
 //////////////////////
 header, footer {
   position: fixed;
@@ -21,13 +27,16 @@ header, footer {
 
 header {
   top: 0;
+  height: 50px;
 }
 
 footer {
     bottom: 0;
     margin-bottom: 0!important;
+    height: 30px;
 }
 
 main {
   margin-top: 80px;
+  margin-bottom: 60px;
 }
