@@ -1,7 +1,18 @@
-export class Course {
-  constructor(public id: number,
-              public title: string,
-              public duration: number,
-              public date: string,
-              public description: string) {}
+export interface Course {
+  id: number,
+  title: string,
+  duration: number,
+  date: string,
+  description: string
+
+  // getTitle(): string;
+  // setTitle(title: string): ICourse;
+  //
+  // getDuration(): number;
+  // setDuration(duration: number): ICourse;
+  //
+  // getCreationDate(): Date;
+  //
+  // getDescription(): string;
+  // setDescription(description: string): ICourse;
 }

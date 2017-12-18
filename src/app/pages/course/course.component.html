@@ -1,12 +1,13 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div class="course block">
+<div class="course block" [border]="course.date" [ngClass]="{'bgTopRated':course.topRated}" >
   <div class="info">
     <div class="headerInfo">
       <div>
-        <h2>{{ course.title }}</h2>
-        <div>{{ ((course.duration - course.duration % 60) ? (course.duration -course.duration % 60) / 60 + ' h ':'') + course.duration % 60  + ' min'}} </div>
+        <h2>{{ course.title | uppercase }}</h2>
+        <div>{{ course.duration | time }} </div>
+        <mat-icon *ngIf="course.topRated">star_border</mat-icon>
       </div>
-      <div>{{ course.date | date:'dd/MM/yyyy' }}</div>
+      <div>{{ course.date | date:'dd.MM.yyyy' }}</div>
     </div>
     <div>{{ course.description }}</div>
   </div>
