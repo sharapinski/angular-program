@@ -1,6 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <app-header [showLoginLogout]="false"></app-header>
 <main>
-  <login></login>
+  <login (submit)="onSubmit($event)"></login>
 </main>
 <app-footer></app-footer>

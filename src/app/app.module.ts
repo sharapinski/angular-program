@@ -52,4 +52,4 @@ import { OrderByPipe } from './shared/orderby.pipe';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

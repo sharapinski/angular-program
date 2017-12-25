@@ -5,12 +5,12 @@
     <h1>Test App with Courses</h1>
   </div>
     <div *ngIf="showLoginLogout">
-    <div class="logoff" *ngIf="isAuth()">
+    <div class="logoff">
       <div>{{ user.firstName }} {{ user.lastName }}</div>
       <a href="#" (click)="onLogoff()">logoff</a>
     </div>
-    <div class="login" *ngIf="!isAuth()">
+    <!-- <div class="login" *ngIf="!isAuth()">
       <a href="#" (click)="onLogin()">login</a>
-    </div>
+    </div> -->
   </div>
 </header>

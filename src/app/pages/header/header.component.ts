@@ -12,21 +12,22 @@ export class HeaderComponent implements OnInit{
     user: User;
     @Input() showLoginLogout: boolean;
 
-    constructor(private authService: AuthService) {
+    constructor(private _authService: AuthService) {
       this.showLoginLogout = true;
     }
 
     ngOnInit() {
-      this.user = this.authService.getUserInfo();
+      this.user = this._authService.getUserInfo();
     }
 
     onLogoff() {
-      this.authService.logout()
+      this._authService.logout()
       console.log("onLogoff");
+      window.location.reload();
     }
 
     isAuth() : boolean {
-      return this.authService.isAuthorized();
+      return this._authService.isAuthorized();
     }
 
     onLogin() {
