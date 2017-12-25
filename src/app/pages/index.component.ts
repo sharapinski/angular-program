@@ -1,58 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ICourse } from '../shared/icourse';
 import { Course } from '../shared/course';
 import { CourseService } from '../shared/course.service';
+import { SearchPipe } from '../shared/search.pipe';
 
 
 @Component({
-  selector: 'courses-page',
-  templateUrl: './index.component.html'
+  selector: 'index-page',
+  templateUrl: './index.component.html',
+  styleUrls: ['./index.component.scss'],
+  providers:[SearchPipe]
 })
 export class IndexComponent {
   courses: Course[] = [];
+  private _pipe: SearchPipe = new SearchPipe();
 
-  constructor(private service: CourseService){}
+  constructor(private _service: CourseService) {}
 
   ngOnInit() {
-    this.courses = this.service.getList();
+    this.courses = this._service.getList();
   }
 
-  onItemDelete(item: Course): void {
-    var index = this.courses.indexOf(item);
-    this.courses.splice(index, 1);
+  search(str: string): void {
+    this.courses = this._pipe.transform(this._service.getList(), str)
   }
-
-  // ngOnInit() {
-  //   console.log('courses-page: ngOnInit');
-  // }
-  //
-  // ngOnChanges() {
-  //   console.log('courses-page: ngOnChanges');
-  // }
-  //
-  // ngDoCheck() {
-  //   console.log('courses-page: ngDoCheck');
-  // }
-  //
-  // ngOnDestroy() {
-  //   console.log('courses-page: ngOnDestroy');
-  // }
-  //
-  // ngAfterContentInit() {
-  //   console.log('courses-page: ngAfterContentInit');
-  // }
-  //
-  // ngAfterContentChecked() {
-  //   console.log('courses-page: ngAfterContentChecked');
-  // }
-  //
-  // ngAfterViewInit() {
-  //   console.log('courses-page: ngAfterViewInit');
-  // }
-  //
-  // ngAfterViewChecked() {
-  //   console.log('courses-page: ngAfterViewChecked');
-  // }
-
 }

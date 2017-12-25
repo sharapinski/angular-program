@@ -1,12 +1,17 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <app-header></app-header>
 <main>
-  <search></search>
+  <search (search)="search($event)"></search>
   <section>
-    <course *ngFor="let item of courses"
-      [course]="item"
-      (delete)="onItemDelete(item);"></course>
+    <div *ngIf="!!courses.length">
+      <course *ngFor="let item of courses | orderby:'date'"
+        [course]="item"
+        (delete)="onItemDelete(item);">
+      </course>
+    </div>
+    <div *ngIf="!courses.length" class="noData">
+      No data. Feel free to add new course.
+    </div>
   </section>
-  <!-- <login-page></login-page> -->
 </main>
 <app-footer></app-footer>

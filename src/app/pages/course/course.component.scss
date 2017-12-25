@@ -17,6 +17,7 @@
 .headerInfo div {
   display: flex;
   align-items: baseline;
+  margin-right: 10px;
 }
 
 .headerInfo h2 {
@@ -33,4 +34,8 @@
 .actions button {
   margin-bottom: 10px;
   width: 100%;
+}
+
+.bgTopRated {
+  background-color: #FABD64;
 }
