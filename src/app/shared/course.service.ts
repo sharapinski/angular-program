@@ -11,8 +11,7 @@ export class CourseService {
     return this.courses;
   }
 
-  createItem(id, title, duration, date, description) {
-    let item = {id, title, duration, date, description};
+  createItem(item: Course) {
     this.courses.push(item);
   }
 
