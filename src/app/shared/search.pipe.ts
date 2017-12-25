@@ -1,16 +1,17 @@
 //Import from '@angular/core' the module Pipe and PipeTransform
-import { Pipe, PipeTransform } from '@angular/core';
+import { Injectable, Pipe, PipeTransform } from '@angular/core';
 
 //Tell Angular2 we're creating a Pipe with TypeScript decorators
+@Injectable()
 @Pipe({
 	name: 'search'
 })
 export class SearchPipe implements PipeTransform {
-	transform(courses: any[], search: string) {
-		if (!courses || !search)
+	transform(arr: any[], search: string) {
+		if (!arr || !search)
 		{
-			return courses
+			return arr
 		}
-		return courses.filter((item) => (item.title||'').toUpperCase().indexOf(search.toUpperCase())> -1);;
+		return arr.filter((item) => (item.title||'').toUpperCase().indexOf(search.toUpperCase())> -1);;
 	}
 }

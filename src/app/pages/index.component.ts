@@ -4,18 +4,16 @@ import { Course } from '../shared/course';
 import { CourseService } from '../shared/course.service';
 import { SearchPipe } from '../shared/search.pipe';
 
-
 @Component({
   selector: 'index-page',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss'],
-  providers:[SearchPipe]
+  providers: [SearchPipe]
 })
 export class IndexComponent {
   courses: Course[] = [];
-  private _pipe: SearchPipe = new SearchPipe();
 
-  constructor(private _service: CourseService) {}
+  constructor(private _service: CourseService, private _pipe: SearchPipe) {}
 
   ngOnInit() {
     this.courses = this._service.getList();
