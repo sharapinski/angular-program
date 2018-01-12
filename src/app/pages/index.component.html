@@ -3,15 +3,7 @@
 <main>
   <search (search)="search($event)"></search>
   <section>
-    <div *ngIf="!!courses.length">
-      <course *ngFor="let item of courses | orderby:'date'"
-        [course]="item"
-        (delete)="onItemDelete(item);">
-      </course>
-    </div>
-    <div *ngIf="!courses.length" class="noData">
-      No data. Feel free to add new course.
-    </div>
+    <course-list [courses]='courses'></course-list>
   </section>
 </main>
 <app-footer></app-footer>

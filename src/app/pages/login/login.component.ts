@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'login',
@@ -8,8 +8,9 @@ import { Component } from '@angular/core';
 export class LoginComponent {
   loginValue: string;
   passwordValue: string;
+  @Output('submit') login = new EventEmitter()
 
-  onEnter(){
-
+  onEnter() {
+    this.login.emit({login: this.loginValue, password: this.loginValue});
   }
 }

@@ -9,6 +9,7 @@ import { IndexComponent } from './pages/index.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { SearchComponent } from './pages/search/search.component';
 import { CourseComponent } from './pages/course/course.component';
+import { CourseListComponent } from './pages/course-list/course-list.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { LoginComponent } from './pages/login/login.component';
 import { LoginPageComponent } from './pages/login-page.component';
@@ -17,6 +18,7 @@ import { CourseService } from './shared/course.service';
 import { AuthService } from './shared/auth.service';
 import { BorderDirective } from './shared/border.directive';
 import { TimePipe } from './shared/time.pipe';
+import { SearchPipe } from './shared/search.pipe';
 import { OrderByPipe } from './shared/orderby.pipe';
 
 
@@ -27,10 +29,12 @@ import { OrderByPipe } from './shared/orderby.pipe';
     HeaderComponent,
     SearchComponent,
     CourseComponent,
+    CourseListComponent,
     FooterComponent,
     LoginComponent,
     LoginPageComponent,
     BorderDirective,
+    SearchPipe,
     TimePipe,
     OrderByPipe
   ],
@@ -43,8 +47,9 @@ import { OrderByPipe } from './shared/orderby.pipe';
   ],
   providers: [
     CourseService,
-    AuthService
+    AuthService,
+    SearchPipe
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

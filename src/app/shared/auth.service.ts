@@ -1,14 +1,15 @@
-import { user } from './userData';
+//import { user } from './userData';
 import { User } from './user';
 
 export class AuthService {
   private key: string = 'courseAuth';
 
   constructor(){
-    this.login("test", "12345");
+    //this.login("test", "12345");
   }
 
   login(login: string, pass: string) {
+    const user = {firstName: login, lastName: ''};
     localStorage.setItem(this.key, JSON.stringify(user));
   }
 

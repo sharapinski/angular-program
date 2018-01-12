@@ -13,7 +13,8 @@ import { SearchPipe } from '../shared/search.pipe';
 export class IndexComponent {
   courses: Course[] = [];
 
-  constructor(private _service: CourseService, private _pipe: SearchPipe) {}
+  constructor(private _service: CourseService,
+              private _pipe: SearchPipe) {}
 
   ngOnInit() {
     this.courses = this._service.getList();

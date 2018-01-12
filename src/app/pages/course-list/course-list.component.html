@@ -1,0 +1,9 @@
+<div *ngIf="!!courses.length">
+  <course *ngFor="let item of courses | orderby:'date'"
+    [course]="item"
+    (delete)="onItemDelete(item);">
+  </course>
+</div>
+<div *ngIf="!courses.length" class="noData">
+  No data. Feel free to add new course.
+</div>

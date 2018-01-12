@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 import { Course } from '../../shared/course';
 import { CourseService } from '../../shared/course.service';
@@ -7,18 +7,16 @@ import { CourseService } from '../../shared/course.service';
 @Component({
   selector: 'course',
   templateUrl: './course.component.html',
-  styleUrls: ['./course.component.scss']
+  styleUrls: ['./course.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CourseComponent {
+export class CourseComponent{
   @Input() course: Course;
-  //@Output("delete") delete = new EventEmitter();
+  @Output() delete = new EventEmitter();
 
-  constructor(private service : CourseService){}
+  constructor(private _service : CourseService){}
 
   onDelete(): void {
-    var result: boolean = confirm("Do you really want to delete this course? ");
-    if (result) {
-        this.service.removeItem(this.course);
-    }
+    this.delete.emit(this.course);
   }
 }
