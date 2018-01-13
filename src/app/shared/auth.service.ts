@@ -1,30 +1,37 @@
-//import { user } from './userData';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
+
 import { User } from './user';
 
 export class AuthService {
-  private key: string = 'courseAuth';
+  private _key: string = 'courseAuth';
+  public subject: ReplaySubject<User>;
 
-  constructor(){
-    //this.login("test", "12345");
+  constructor() {
+    this.subject = new ReplaySubject(1);
   }
 
   login(login: string, pass: string) {
-    const user = {firstName: login, lastName: ''};
-    localStorage.setItem(this.key, JSON.stringify(user));
+    const user = {firstName: login, lastName: 'Smith'};
+    localStorage.setItem(this._key, JSON.stringify(user));
+
+    this.subject.next(user);
   }
 
   logout() {
-    localStorage.removeItem(this.key);
+    localStorage.removeItem(this._key);
+
+    this.subject.next(null);
   }
 
-  isAuthorized(): boolean {
-    const user = JSON.parse(localStorage.getItem(this.key));
+  isAuthorized(): boolean  {
+    const user = JSON.parse(localStorage.getItem(this._key));
+
     return !!user;
   }
 
   getUserInfo(): User {
-    const userInfo = JSON.parse(localStorage.getItem(this.key));
-    const user = new User(userInfo.firstName, userInfo.lastName);
+    const user = JSON.parse(localStorage.getItem(this._key));
+
     return user;
   }
 }

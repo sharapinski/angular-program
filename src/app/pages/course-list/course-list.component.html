@@ -1,7 +1,7 @@
 <div *ngIf="!!courses.length">
   <course *ngFor="let item of courses | orderby:'date'"
     [course]="item"
-    (delete)="onItemDelete(item);">
+    (delete)="onDelete(item);">
   </course>
 </div>
 <div *ngIf="!courses.length" class="noData">

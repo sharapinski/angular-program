@@ -19,7 +19,7 @@ export const courses = [
     id: 3,
     title: "Course 3 new",
     duration: 80,
-    date: '1513370387394',
+    date: '1516480387394',
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pharetra, odio eu consectetur tristique, turpis risus facilisis nunc, et finibus sapien justo a mauris.",
     topRated: false
   }
