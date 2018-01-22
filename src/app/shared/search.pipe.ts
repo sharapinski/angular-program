@@ -12,6 +12,7 @@ export class SearchPipe implements PipeTransform {
 		{
 			return arr
 		}
+		
 		return arr.filter((item) => (item.title||'').toUpperCase().indexOf(search.toUpperCase())> -1);;
 	}
 }

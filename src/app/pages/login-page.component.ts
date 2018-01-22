@@ -13,8 +13,6 @@ export class LoginPageComponent {
   onSubmit(event){
     if(event.login) {
       this._authService.login(event.login, event.password);
-      alert("Autorition was successful!");
-      window.location.reload();
     }
   }
 

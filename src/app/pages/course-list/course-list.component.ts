@@ -13,7 +13,7 @@ export class CourseListComponent{
 
   constructor(private _service : CourseService){}
 
-  onItemDelete(item: Course){
+  onDelete(item: Course){
     var result: boolean = confirm("Do you really want to delete this course? ");
     if (result) {
       this._service.removeItem(item);

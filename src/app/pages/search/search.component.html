@@ -1,8 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="block-margin">
   <div>
-     <input type="text" [(ngModel)]="searchValue" >
+     <input type="text" [(ngModel)]="searchValue">
      <button mat-raised-button (click)="onSearch();"><i>Find</i></button>
   </div>
-  <button mat-raised-button>Add course</button>
+  <button mat-raised-button (click)="onAddCourse();">Add course</button>
 </div>
