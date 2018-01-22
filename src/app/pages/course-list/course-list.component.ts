@@ -16,13 +16,7 @@ export class CourseListComponent{
   onDelete(item: Course){
     var result: boolean = confirm("Do you really want to delete this course? ");
     if (result) {
-      this._service.removeItem(item).subscribe(res => {
-        // delete the item locally
-        let index = this.courses.indexOf(item);
-        if(index > -1) {
-          this.courses.splice(index, 1);
-        }
-      });
+      this._service.removeItem(item);
     }
   }
 }

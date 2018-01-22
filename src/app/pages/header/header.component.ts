@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { Subscription } from 'rxjs/Subscription';
 
 import { AuthService } from '../../shared/auth.service';
 import { User } from '../../shared/user';
@@ -11,7 +12,7 @@ import { User } from '../../shared/user';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
     user: User;
-    _subscription: any;
+    _subscription: Subscription;
 
     constructor(private _authService: AuthService) {
       if(this._authService.isAuthorized()) {
@@ -28,6 +29,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-      this._subscription.unsubscribe();
+      if(this._subscription) {
+        this._subscription.unsubscribe();
+      }
     }
 }

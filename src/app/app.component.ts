@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 
 import { AuthService } from './shared/auth.service';
 
@@ -8,17 +9,19 @@ import { AuthService } from './shared/auth.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
   isAuthorized: boolean;
-  _subscription: any;
+  _subscription: Subscription;
 
   constructor(private _authService: AuthService) {
     this.isAuthorized = this._authService.isAuthorized();
   }
 
   ngOnInit() {
-    this._authService.subject.subscribe(res => this.isAuthorized = !!res);
+    this._subscription = this._authService.subject.subscribe(res => this.isAuthorized = !!res);
   }
 
   ngOnDestroy() {
-    this._subscription.unsubscribe();
+    if(this._subscription) {
+      this._subscription.unsubscribe();
+    }
   }
 }
