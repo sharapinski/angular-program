@@ -8,8 +8,13 @@ import { Component, Output, EventEmitter} from '@angular/core';
 export class SearchComponent {
   searchValue: string = "";
   @Output() search = new EventEmitter();
+  @Output() addCourse = new EventEmitter();
 
   onSearch(): void {
-    this.search.emit(this.searchValue)
+    this.search.emit(this.searchValue);
+  }
+
+  onAddCourse(): void {
+    this.addCourse.emit();
   }
 }

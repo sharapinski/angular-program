@@ -1,0 +1,22 @@
+<div class="block">
+  <div>
+    <label for="title-inner">Title</label>
+    <input id="title-inner" type="text">
+  </div>
+  <div>
+    <label for="description-inner">Description</label>
+    <textarea id="description-inner" rows="4" style="resize:none;"></textarea>
+  </div>
+  <div>
+    <label for="date-inner">Date</label>
+    <input id="date-inner" type="text">
+  </div>
+  <div>
+    <label for="duration-inner">Duration</label>
+    <input id="duration-inner" type="text">
+  </div>
+  <div class="actions">
+    <button mat-raised-button>Save</button>
+    <button mat-raised-button (click)="onCancel();">Cancel</button>
+  </div>
+</div>

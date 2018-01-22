@@ -8,11 +8,13 @@ import { AppComponent } from './app.component';
 import { IndexComponent } from './pages/index.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { SearchComponent } from './pages/search/search.component';
-import { CourseComponent } from './pages/course/course.component';
+import { CourseComponent } from './pages/course-list/course/course.component';
 import { CourseListComponent } from './pages/course-list/course-list.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { LoginComponent } from './pages/login/login.component';
 import { LoginPageComponent } from './pages/login-page.component';
+import { AddCourseComponent } from './pages/addcourse/addcourse.component';
+
 
 import { CourseService } from './shared/course.service';
 import { AuthService } from './shared/auth.service';
@@ -33,6 +35,7 @@ import { OrderByPipe } from './shared/orderby.pipe';
     FooterComponent,
     LoginComponent,
     LoginPageComponent,
+    AddCourseComponent,
     BorderDirective,
     SearchPipe,
     TimePipe,
