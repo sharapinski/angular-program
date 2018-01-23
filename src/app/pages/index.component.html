@@ -5,6 +5,9 @@
     <search (search)="onSearch($event)" (addCourse)="onAddCourse()"></search>
     <section>
       <course-list [courses]="courses | search: searchValue"></course-list>
+      <div class="showMore" *ngIf="page.current!==page.total">
+        <button mat-button (click)='onShowMore()' >Show More</button>
+      </div>
     </section>
   </div>
   <add-course *ngIf="showAddCourse" (save)="onSave($event)" (cancel)="onCancel()"></add-course>
