@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule, MatIconModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { IndexComponent } from './pages/index.component';
@@ -46,7 +47,8 @@ import { OrderByPipe } from './shared/orderby.pipe';
     MatButtonModule,
     MatIconModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    HttpModule
   ],
   providers: [
     CourseService,

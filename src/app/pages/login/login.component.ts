@@ -11,6 +11,6 @@ export class LoginComponent {
   @Output('submit') login = new EventEmitter()
 
   onEnter() {
-    this.login.emit({login: this.loginValue, password: this.loginValue});
+    this.login.emit({login: this.loginValue, password: this.passwordValue});
   }
 }

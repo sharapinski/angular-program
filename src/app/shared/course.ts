@@ -2,9 +2,9 @@ export interface Course {
   id: number,
   title: string,
   duration: number,
-  date: string,
+  date: Date,
   description: string,
-  topRated: boolean
+  isTopRated: boolean
 
   // getTitle(): string;
   // setTitle(title: string): ICourse;

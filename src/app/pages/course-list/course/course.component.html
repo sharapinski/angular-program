@@ -1,11 +1,11 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div class="course block" [border]="course.date" [ngClass]="{'bgTopRated':course.topRated}" >
+<div class="course block" [border]="course.date" [ngClass]="{'bgTopRated':course.isTopRated}" >
   <div class="info">
     <div class="headerInfo">
       <div>
         <h2>{{ course.title | uppercase }}</h2>
         <div>{{ course.duration | time }} </div>
-        <mat-icon *ngIf="course.topRated">star_border</mat-icon>
+        <mat-icon *ngIf="course.isTopRated">star_border</mat-icon>
       </div>
       <div>{{ course.date | date:'dd.MM.yyyy' }}</div>
     </div>

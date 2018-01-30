@@ -15,22 +15,39 @@ export class IndexComponent {
   searchValue: string = '';
   showAddCourse: boolean = false;
   _mainThread: Subscription;
+  page = {current: 0, total: 0};
 
   constructor(private _service: CourseService) {}
 
   ngOnInit() {
     this._mainThread = this._service.getList()
-                .map(list => list.filter(course => Number(course.date) > new Date().getTime() - 14 * 24 * 60 * 1000))
-                .subscribe(courses => this.courses = courses);
+                .map(res => {
+                  let page = res.facets && res.facets.pages ? res.facets.pages: null;
+                  let list = res.courses ? res.courses.filter(item => new Date(item.date).getTime() > new Date().getTime() - 14 * 24 * 60 * 60 * 1000): [];
+                  return {page, list};
+                })
+                .subscribe(obj => {
+                  if(obj.page) {
+                    this.page = obj.page;
+                  }
+                  this.courses = this.courses.concat(obj.list)
+                });
   }
 
   onSearch(str: string): void {
     this.searchValue = str;
+    this.courses = [];
+    this.page.current = 0;
+    this.onShowMore();
   }
 
   onAddCourse() {
     this.showAddCourse = true;
   }
+
+    onShowMore() {
+      this._service.getList(this.searchValue, this.page.current + 1);
+    }
 
   onSave() {}
 
