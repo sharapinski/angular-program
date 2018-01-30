@@ -22,13 +22,16 @@ export class IndexComponent {
   ngOnInit() {
     this._mainThread = this._service.getList()
                 .map(res => {
-                  if(res.facets && res.facets.pages) {
-                    this.page = res.facets.pages;
-                  }
+                  let page = res.facets && res.facets.pages ? res.facets.pages: null;
                   let list = res.courses ? res.courses.filter(item => new Date(item.date).getTime() > new Date().getTime() - 14 * 24 * 60 * 60 * 1000): [];
-                  return list;
+                  return {page, list};
                 })
-                .subscribe(list => this.courses = this.courses.concat(list));
+                .subscribe(obj => {
+                  if(obj.page) {
+                    this.page = obj.page;
+                  }
+                  this.courses = this.courses.concat(obj.list)
+                });
   }
 
   onSearch(str: string): void {

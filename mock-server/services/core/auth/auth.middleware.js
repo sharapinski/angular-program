@@ -30,6 +30,7 @@ module.exports = (server) => {
 		if(!matchedUser) {
 			res.status(401).send('Unauthorized');
 		} else {
+			matchedUser = Object.assign({}, matchedUser);
 			matchedUser.password = null;
 			res.json(matchedUser);
 		}
