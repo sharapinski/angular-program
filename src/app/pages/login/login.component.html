@@ -1,5 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="login">
+<!--
   <div class="row">
     <div class="label">Login</div>
     <input type="text" [(ngModel)]="loginValue" >
@@ -10,5 +11,22 @@
     <input type="password" [(ngModel)]="passwordValue" >
     <span>* enter</span>
   </div>
-  <button mat-raised-button (click)='onEnter()'>Enter</button>
+  <button mat-raised-button (click)='onEnter()'>Enter</button> -->
+
+  <form #form="ngForm" (submit)="onEnter(form)">
+    <fieldset ngModelGroup="user">
+      <div class="row">
+        <label class="required">Login:</label>
+        <input type="text" name="login" #login="ngModel" ngModel maxlength="50" required
+           (ngModelChange)="onChange()">
+      </div>
+      <div class="row">
+        <label class="required">Password:</label>
+        <input type="password" name="password" #password="ngModel" ngModel maxlength="50" required
+           (ngModelChange)="onChange()">
+      </div>
+      <button mat-raised-button [disabled]="!(login.value && password.value)" type="submit">Enter</button>
+      <span *ngIf="!!message" class="error">{{message}}</span>
+    </fieldset>
+  </form>
 </div>

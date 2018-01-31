@@ -12,9 +12,14 @@ import { CourseService } from '../../../shared/course.service';
 })
 export class CourseComponent {
   @Input() course: Course;
+  @Output() edit = new EventEmitter();
   @Output() delete = new EventEmitter();
 
   constructor(private _service : CourseService) {}
+
+  onEdit(): void {
+    this.edit.emit(this.course);
+  }
 
   onDelete(): void {
     this.delete.emit(this.course);

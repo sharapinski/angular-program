@@ -18,14 +18,14 @@ export class AuthService {
     this.subject = new ReplaySubject(1);
   }
 
-  login(login: string, password: string) {
-    this.http.post(this._loginUrl, {login, password})
+  login(login: string, password: string): Promise<any> {
+    return this.http.post(this._loginUrl, {login, password})
                     .toPromise()
                     .then((res: Response) => {
                         let user = res.json();
                         localStorage.setItem(this._key, user.token);
                         this.readUserInfo();
-                    }, this.handleError);
+                    });
   }
 
   logout() {
@@ -59,6 +59,6 @@ export class AuthService {
   private handleError(error: any) {
     console.error('Error: ', error);
 
-    alert(`${error.statusText}: ${error.text()}`);
+    alert(`${error.text()}`);
   }
 }

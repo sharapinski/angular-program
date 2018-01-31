@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Course } from '../../shared/course';
 import { CourseService } from '../../shared/course.service';
@@ -10,8 +10,13 @@ import { CourseService } from '../../shared/course.service';
 })
 export class CourseListComponent{
   @Input() courses: Course[];
+  @Output() edit = new EventEmitter();
 
   constructor(private _service : CourseService){}
+
+  onEdit(item: Course) {
+    this.edit.emit(item);
+  }
 
   onDelete(item: Course) {
     var result: boolean = confirm("Do you really want to delete this course? ");

@@ -17,6 +17,19 @@ input {
   height: 24px;
 }
 
+label.required {
+  position: relative;
+}
+
+label.required:after {
+  content: "*";
+  color: red;
+}
+
+.error {
+  color: red;
+}
+
 
 //////////////////////
 header, footer {
