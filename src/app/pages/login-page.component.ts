@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { AuthService } from '../shared/auth.service';
+// import { AuthService } from '../shared/auth.service';
 
 @Component({
   selector: 'login-page',
@@ -8,12 +8,12 @@ import { AuthService } from '../shared/auth.service';
 })
 export class LoginPageComponent {
 
-  constructor(private _authService: AuthService){}
-
-  onSubmit(event){
-    if(event.login) {
-      this._authService.login(event.login, event.password);
-    }
-  }
+  // constructor(private _authService: AuthService){}
+  //
+  // onSubmit(event){
+  //   if(event.login) {
+  //     this._authService.login(event.login, event.password);
+  //   }
+  // }
 
 }

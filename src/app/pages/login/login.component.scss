@@ -1,12 +1,17 @@
+fieldset {
+  border:0;
+}
+
+label {
+  display: inline-flex;
+  width: 80px;
+}
+
 .login {
   width:50%;
   margin: 200px auto;
 }
 
-.label {
-  display: inline-flex;
-  width: 80px;
-}
 .row {
   margin-bottom: 10px;
 }

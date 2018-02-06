@@ -24,6 +24,9 @@ import { TimePipe } from './shared/time.pipe';
 import { SearchPipe } from './shared/search.pipe';
 import { OrderByPipe } from './shared/orderby.pipe';
 
+import { DateComponent } from "./controls/date.component";
+
+
 
 @NgModule({
   declarations: [
@@ -40,7 +43,8 @@ import { OrderByPipe } from './shared/orderby.pipe';
     BorderDirective,
     SearchPipe,
     TimePipe,
-    OrderByPipe
+    OrderByPipe,
+    DateComponent
   ],
   imports: [
     BrowserModule,

@@ -1,22 +1,33 @@
 <div class="block">
-  <div>
-    <label for="title-inner">Title</label>
-    <input id="title-inner" type="text">
-  </div>
-  <div>
-    <label for="description-inner">Description</label>
-    <textarea id="description-inner" rows="4" style="resize:none;"></textarea>
-  </div>
-  <div>
-    <label for="date-inner">Date</label>
-    <input id="date-inner" type="text">
-  </div>
-  <div>
-    <label for="duration-inner">Duration</label>
-    <input id="duration-inner" type="text">
-  </div>
-  <div class="actions">
-    <button mat-raised-button>Save</button>
-    <button mat-raised-button (click)="onCancel();">Cancel</button>
-  </div>
+
+  <form #form="ngForm" (submit)="onSave(form)">
+    <fieldset ngModelGroup="course">
+      <div class="row">
+        <label for="title-inner" class="required">Title:</label>
+        <input id="title-inner" name="title" #title="ngModel" [ngModel]="item.title" type="text" maxlength="50" required class="active">
+        <span class="error" *ngIf="title.invalid && title.touched">{{title.errors | json}}</span>
+      </div>
+
+      <div class="row">
+        <label for="description-inner" class="required">Description</label>
+        <textarea id="description-inner" name="description" #description="ngModel" [ngModel]="item.description" rows="4" style="resize:none;" maxlength="500" required class="active"></textarea>
+        <span class="error" *ngIf="description.invalid && description.touched">{{description.errors | json}}</span>
+      </div>
+      <div class="row">
+        <label for="date-inner" class="required">Date</label>
+        <date [date]="selectedDate" name="date" #date="ngModel" [ngModel]="item.date" required class="active"></date>
+        <span class="error" *ngIf="date.invalid && date.touched">{{date.errors | json}}</span>
+      </div>
+      <div class="row">
+        <label for="duration-inner" class="required">Duration</label>
+          <input id="duration-inner" name="duration" #duration="ngModel" [ngModel]="item.duration" type="number" required style="width:150px">
+          <div style="width:140px;display:inline-flex">{{ duration.value | time }}</div>
+        <span class="error" *ngIf="duration.invalid && duration.touched">{{duration.errors | json}}</span>
+      </div>
+      <div class="row">
+        <button mat-raised-button type="submit" [disabled]="form.invalid">Save</button>
+        <button mat-raised-button (click)="onCancel()">Cancel</button>
+      </div>
+    </fieldset>
+  </form>
 </div>

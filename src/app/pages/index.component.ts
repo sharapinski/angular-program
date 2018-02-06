@@ -16,6 +16,7 @@ export class IndexComponent {
   showAddCourse: boolean = false;
   _mainThread: Subscription;
   page = {current: 0, total: 0};
+  editItem: Course
 
   constructor(private _service: CourseService) {}
 
@@ -42,12 +43,27 @@ export class IndexComponent {
   }
 
   onAddCourse() {
+    //this.editItem = new Course();
+    this.editItem = {
+      id: 0,
+      title: "",
+      description: "",
+      isTopRated: false,
+      date: new Date(),
+      // authors: [],
+      duration: undefined
+    };
     this.showAddCourse = true;
   }
 
-    onShowMore() {
-      this._service.getList(this.searchValue, this.page.current + 1);
-    }
+  onEdit(event) {
+    this.editItem = event;
+    this.showAddCourse = true;
+  }
+
+  onShowMore() {
+    this._service.getList(this.searchValue, this.page.current + 1);
+  }
 
   onSave() {}
 

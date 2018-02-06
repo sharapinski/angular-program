@@ -1,4 +1,6 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
+
+import { AuthService } from '../../shared/auth.service';
 
 @Component({
   selector: 'login',
@@ -6,11 +8,16 @@ import { Component, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  loginValue: string;
-  passwordValue: string;
-  @Output('submit') login = new EventEmitter()
+  message: string = ""
 
-  onEnter() {
-    this.login.emit({login: this.loginValue, password: this.passwordValue});
+  constructor(private _authService: AuthService) {}
+
+  onEnter(form) {
+    const promise = this._authService.login(form.value.user.login, form.value.user.password);
+    promise.catch(res => this.message = (res && typeof(res.text) === "function") ? res.text(): "");
+  }
+
+  onChange(){
+    this.message = "";
   }
 }
