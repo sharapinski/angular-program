@@ -1,3 +1,4 @@
+<search (search)="onSearch($event)" (addCourse)="onAddCourse()"></search>
 <div *ngIf="!!courses.length">
   <course *ngFor="let item of courses | orderby:'date'"
     [course]="item"
