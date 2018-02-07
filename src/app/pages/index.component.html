@@ -1,7 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <app-header></app-header>
 <main>
-  <div *ngIf="!showAddCourse">
+  <!-- <div *ngIf="!showAddCourse">
+
     <search (search)="onSearch($event)" (addCourse)="onAddCourse()"></search>
     <section>
       <course-list [courses]="courses | search: searchValue" (edit)="onEdit($event)"></course-list>
@@ -9,7 +10,10 @@
         <button mat-button (click)='onShowMore()' >Show More</button>
       </div>
     </section>
+
   </div>
-  <add-course *ngIf="showAddCourse" [item]="editItem" (save)="onSave($event)" (cancel)="onCancel()"></add-course>
+
+  <add-course *ngIf="showAddCourse" [item]="editItem" (save)="onSave($event)" (cancel)="onCancel()"></add-course> -->
+  <router-outlet></router-outlet>
 </main>
 <app-footer></app-footer>

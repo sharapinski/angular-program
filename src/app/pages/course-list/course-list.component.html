@@ -1,9 +1,13 @@
+<search (search)="onSearch($event)" (addCourse)="onAddCourse()"></search>
 <div *ngIf="!!courses.length">
   <course *ngFor="let item of courses | orderby:'date'"
     [course]="item"
     (edit)="onEdit($event)"
     (delete)="onDelete($event)">
   </course>
+  <div class="showMore" *ngIf="page.current!==page.total">
+    <button mat-button (click)='onShowMore()' >Show More</button>
+  </div>
 </div>
 <div *ngIf="!courses.length" class="noData">
   No data. Feel free to add new course.
