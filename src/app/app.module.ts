@@ -4,6 +4,7 @@ import { MatButtonModule, MatIconModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { IndexComponent } from './pages/index.component';
@@ -25,6 +26,9 @@ import { SearchPipe } from './shared/search.pipe';
 import { OrderByPipe } from './shared/orderby.pipe';
 
 import { DateComponent } from "./controls/date.component";
+import { ROUTES } from "./app.routes";
+import { NoContentComponent } from './pages/nocontent/nocontent.component';
+
 
 
 
@@ -44,7 +48,8 @@ import { DateComponent } from "./controls/date.component";
     SearchPipe,
     TimePipe,
     OrderByPipe,
-    DateComponent
+    DateComponent,
+    NoContentComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +57,8 @@ import { DateComponent } from "./controls/date.component";
     MatIconModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot(ROUTES)
   ],
   providers: [
     CourseService,

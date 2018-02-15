@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../../shared/auth.service';
+
 
 @Component({
   selector: 'login',
@@ -10,14 +12,18 @@ import { AuthService } from '../../shared/auth.service';
 export class LoginComponent {
   message: string = ""
 
-  constructor(private _authService: AuthService) {}
+  constructor(private _authService: AuthService, private router: Router) {}
 
   onEnter(form) {
     const promise = this._authService.login(form.value.user.login, form.value.user.password);
-    promise.catch(res => this.message = (res && typeof(res.text) === "function") ? res.text(): "");
+    promise.then(res => {
+      this._authService.readUserInfo();
+      this.router.navigate(["./courses"]);
+    },
+    res => this.message = (res && typeof(res.text) === "function") ? res.text(): "");
   }
 
-  onChange(){
+  onChange() {
     this.message = "";
   }
 }

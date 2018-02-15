@@ -38,7 +38,18 @@ module.exports = (server) => {
 	});
 
 	router.delete('/courses/:id', (req, res, next) => {
-		
+		let courses = server.db.getState().courses;
+		console.log('DELETE: ' + req.params.id);
+
+		let index = courses.findIndex(item => item.id == req.params.id)
+		courses.index
+
+		if (index > -1) {
+   		courses.splice(index, 1);
+	 		res.json();
+		} else {
+			res.status(404).send('not found');
+		} 
 	});
 
 	return router;
