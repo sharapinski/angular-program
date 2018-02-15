@@ -1,6 +1,8 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
 import { AuthService } from '../../shared/auth.service';
 import { User } from '../../shared/user';
@@ -12,13 +14,17 @@ import { User } from '../../shared/user';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
     user: User;
-    _subscription: Subscription;
+    subscription: Subscription;
+    authoriser: Observable<any>;
 
-    constructor(private _authService: AuthService,  private router: Router) {}
+    constructor(private _authService: AuthService,  private router: Router, private store: Store<any>) {
+      this.authoriser = this.store.select<any>('authoriser');
+    }
 
     ngOnInit() {
-      this._subscription = this._authService.subject.subscribe(userInfo => this.user = userInfo);
-      // this._authService.readUserInfo();
+      this.subscription = this.store.subscribe(userInfo => {
+        debugger;
+        this.user = userInfo;});
     }
 
     onLogoff() {
@@ -27,8 +33,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-      if(this._subscription) {
-        this._subscription.unsubscribe();
+      if(this.subscription) {
+        this.subscription.unsubscribe();
       }
     }
 }

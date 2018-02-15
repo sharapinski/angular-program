@@ -1,35 +1,51 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 
 import { AuthService } from './shared/auth.service';
-import { User } from './shared/user';
+// import { User } from './shared/user';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit, OnDestroy {
-  _subscription: Subscription;
+  // userInfo: User;
+  subscription: Subscription;
+  authoriser: Observable<any>;
 
-  constructor(private _authService: AuthService,  private router: Router) {}
+  constructor(private authService: AuthService,  private router: Router, private store: Store<any>) {
+    this.authoriser = this.store.select<any>('authoriser');
+  }
 
   ngOnInit() {
     // subscribe on userInfo
-    // this._subscription = this._authService.subject.subscribe(userInfo => this.userInfo = userInfo);
+    this.subscription = this.authoriser.subscribe(userInfo => {
+    debugger;
+      // this.userInfo = userInfo;
+      if(!userInfo) {
+        this.navToLogin();
+      }
+    });
 
     // check authorization
-    let isAuthorized = this._authService.isAuthorized()
-    if(isAuthorized) {
-      this._authService.readUserInfo();
-    } else {
-      this.router.navigate(['./login']);
-    }
+    // let isAuthorized = this._authService.isAuthorized()
+    // if(isAuthorized) {
+    //   this.authService.readUserInfo();
+    // } else {
+    //   this.navToLogin();
+    // }
+  }
+
+  navToLogin() {
+    this.router.navigate(['./login']);
   }
 
   ngOnDestroy() {
-    if(this._subscription) {
-      this._subscription.unsubscribe();
+    if(this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 }
