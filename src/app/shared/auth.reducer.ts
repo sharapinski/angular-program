@@ -1,13 +1,11 @@
-import { ActionReducer, Action } from '@ngrx/store';
+import { AuthActionTypes, AuthActions  } from './actions';
 
-import { INFO, ISAUTH } from './actions';
-
-export const authReducer = function (state: Object, action) {
+export default function authReducer(state: Object = {}, action: AuthActions ) {
   debugger;
   switch(action.type) {
-    case INFO:
+    case AuthActionTypes.INFO:
       return { ...state, userInfo: action.payload };
-    case ISAUTH:
+    case AuthActionTypes.ISAUTH:
       return { ...state, isAuthorized: action.payload };
     default:
       return state;

@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 
 import { User } from './user';
 import { settings } from '../settings';
-import { INFO, ISAUTH } from './actions';
+import { Info, IsAuth } from './actions';
 
 
 Injectable()
@@ -28,12 +28,12 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem(this._key);
-    this.store.dispatch({type: ISAUTH, payload: false});
+    this.store.dispatch(new IsAuth(false));
   }
 
   isAuthorized(): void  {
     const isAuthorized = !!localStorage.getItem(this._key);
-    this.store.dispatch({type: ISAUTH, payload: isAuthorized});
+    this.store.dispatch(new IsAuth(isAuthorized));
   }
 
   readUserInfo(): void {
@@ -49,7 +49,7 @@ export class AuthService {
                     .then((res: Response) => {
                         let user = res.json();
                         debugger;
-                        this.store.dispatch({type: INFO, payload: user});
+                        this.store.dispatch(new Info(user));
                     }, this.handleError);
   }
 

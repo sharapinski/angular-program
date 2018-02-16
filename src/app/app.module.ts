@@ -24,7 +24,7 @@ import { BorderDirective } from './shared/border.directive';
 import { TimePipe } from './shared/time.pipe';
 import { SearchPipe } from './shared/search.pipe';
 import { OrderByPipe } from './shared/orderby.pipe';
-import { authReducer } from './shared/auth.reducer';
+import authReducer from './shared/auth.reducer';
 
 
 import { DateComponent } from "./controls/date.component";
@@ -59,7 +59,7 @@ import { NoContentComponent } from './pages/nocontent/nocontent.component';
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES),
-    StoreModule.provideStore({authoriser: authReducer})
+    StoreModule.forRoot({count: authReducer}, {})
   ],
   providers: [
     CourseService,

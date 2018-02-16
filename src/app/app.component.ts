@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 
@@ -14,18 +14,19 @@ import { AuthService } from './shared/auth.service';
 export class AppComponent implements OnInit, OnDestroy {
   // userInfo: User;
   subscription: Subscription;
-  authoriser: Observable<any>;
+  authoriser$: Observable<any>;
 
   constructor(private authService: AuthService,  private router: Router, private store: Store<any>) {
-    this.authoriser = this.store.select<any>('authoriser');
+    this.authoriser$ = store.pipe(select('authoriser'));
   }
 
   ngOnInit() {
+    this.authService.isAuthorized();
     // subscribe on userInfo
-    this.subscription = this.authoriser.subscribe(userInfo => {
-    debugger;
+    this.subscription = this.authoriser$.subscribe(state => {
+      debugger;
       // this.userInfo = userInfo;
-      if(!userInfo) {
+      if(!state || !state.userInfo) {
         this.navToLogin();
       }
     });
