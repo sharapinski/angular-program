@@ -1,5 +1,9 @@
 import { Action } from '@ngrx/store';
 
+export interface AppState {
+  authoriser: Object;
+}
+
 export enum AuthActionTypes {
   INFO = 'info',
   ISAUTH = 'isAuth'

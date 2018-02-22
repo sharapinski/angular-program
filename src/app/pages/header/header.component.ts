@@ -6,6 +6,8 @@ import { Store, select } from '@ngrx/store';
 
 import { AuthService } from '../../shared/auth.service';
 import { User } from '../../shared/user';
+import { AppState } from '../../shared/actions';
+
 
 @Component({
   selector: 'app-header',
@@ -17,7 +19,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     subscription: Subscription;
     authoriser$: Observable<any>;
 
-    constructor(private _authService: AuthService,  private router: Router, private store: Store<any>) {
+    constructor(private _authService: AuthService,  private router: Router, private store: Store<AppState>) {
       this.authoriser$ = store.pipe(select('authoriser'));
     }
 

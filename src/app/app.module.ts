@@ -59,7 +59,7 @@ import { NoContentComponent } from './pages/nocontent/nocontent.component';
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES),
-    StoreModule.forRoot({count: authReducer}, {})
+    StoreModule.forRoot({'authoriser': authReducer}, {'authoriser': () => {isAuthorized: false, userInfo: null}; })
   ],
   providers: [
     CourseService,

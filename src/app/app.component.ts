@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { AuthService } from './shared/auth.service';
 // import { User } from './shared/user';
+import { AppState } from './shared/actions';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   authoriser$: Observable<any>;
 
-  constructor(private authService: AuthService,  private router: Router, private store: Store<any>) {
+  constructor(private authService: AuthService,  private router: Router, private store: Store<AppState>) {
     this.authoriser$ = store.pipe(select('authoriser'));
   }
 

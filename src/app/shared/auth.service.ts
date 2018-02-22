@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 
 import { User } from './user';
 import { settings } from '../settings';
-import { Info, IsAuth } from './actions';
+import { Info, IsAuth, AppState } from './actions';
 
 
 Injectable()
@@ -14,7 +14,7 @@ export class AuthService {
   private _loginUrl = `${settings.server}/auth/login`;
   private _userInfooUrl = `${settings.server}/auth/userinfo`;
 
-  constructor(private http: Http, private store: Store<Object>) {}
+  constructor(private http: Http, private store: Store<AppState>) {}
 
   login(login: string, password: string): Promise<any> {
     return this.http.post(this._loginUrl, {login, password})
