@@ -1,43 +1,19 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
-import { Router } from '@angular/router';
-import { Store, select } from '@ngrx/store';
+import { Component, Input } from '@angular/core';
 
 import { AuthService } from '../../shared/auth.service';
 import { User } from '../../shared/user';
-import { AppState } from '../../shared/actions';
-
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
-    user: User;
-    subscription: Subscription;
-    authoriser$: Observable<any>;
+export class HeaderComponent {
+    @Input() user: User;
 
-    constructor(private _authService: AuthService,  private router: Router, private store: Store<AppState>) {
-      this.authoriser$ = store.pipe(select('authoriser'));
-    }
-
-    ngOnInit() {
-      this.subscription = this.authoriser$.subscribe(state => {
-        debugger;
-        this.user = state ? state.userInfo : null;
-      });
-    }
+    constructor(private _authService: AuthService) {}
 
     onLogoff() {
       this._authService.logout();
-      this.router.navigateByUrl('login');
-    }
-
-    ngOnDestroy() {
-      if(this.subscription) {
-        this.subscription.unsubscribe();
-      }
     }
 }

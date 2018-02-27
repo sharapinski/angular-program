@@ -24,12 +24,16 @@ import { BorderDirective } from './shared/border.directive';
 import { TimePipe } from './shared/time.pipe';
 import { SearchPipe } from './shared/search.pipe';
 import { OrderByPipe } from './shared/orderby.pipe';
-import authReducer from './shared/auth.reducer';
+import { authReducer } from './shared/auth.reducer';
+import { courseListReducer } from './shared/course.reducer';
+
+import { metaReducers } from './shared/meta.reducer';
 
 
 import { DateComponent } from "./controls/date.component";
 import { ROUTES } from "./app.routes";
 import { NoContentComponent } from './pages/nocontent/nocontent.component';
+
 
 
 @NgModule({
@@ -59,7 +63,7 @@ import { NoContentComponent } from './pages/nocontent/nocontent.component';
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES),
-    StoreModule.forRoot({'authoriser': authReducer}, {'authoriser': () => {isAuthorized: false, userInfo: null}; })
+    StoreModule.forRoot({auth: authReducer, courselist: courseListReducer}, { metaReducers })
   ],
   providers: [
     CourseService,

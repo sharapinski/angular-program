@@ -1,37 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
+import { Store, select } from '@ngrx/store';
 
 import { Course } from '../../shared/course';
 import { CourseService } from '../../shared/course.service';
-
+import { AppState } from '../../shared/appstate';
+import { State, Init } from '../../shared/course.reducer';
 @Component({
   selector: 'course-list',
   templateUrl: './course-list.component.html',
   styleUrls: ['./course-list.component.scss']
 })
-export class CourseListComponent{
-  courses: Course[] = [];
+export class CourseListComponent implements OnInit, OnDestroy{
+  courses$: Observable<Course[]>;
+  page$: Observable<{current: number, total: number}>;
   searchValue: string = '';
-  page = {current: 0, total: 0};
-  _mainThread: Subscription;
+  subscription: Subscription;
+  pageCurrent: number;
 
 
-  constructor(private _service : CourseService, private router: Router){}
+  constructor(private _service : CourseService, private router: Router, private store: Store<AppState>){
+    this.courses$ = store.pipe(select('courselist')).pipe(select('courses'));
+    this.page$ = store.pipe(select('courselist')).pipe(select('page'));
+  }
 
   ngOnInit() {
-    this._mainThread = this._service.getList()
-                .map(res => {
-                  let page = res.facets && res.facets.pages ? res.facets.pages: null;
-                  let list = res.courses ? res.courses.filter(item => new Date(item.date).getTime() > new Date().getTime() - 14 * 24 * 60 * 60 * 1000): [];
-                  return {page, list};
-                })
-                .subscribe(obj => {
-                  if(obj.page) {
-                    this.page = obj.page;
-                  }
-                  this.courses = this.courses.concat(obj.list)
-                });
+    this.subscription = this.page$.subscribe(page => this.pageCurrent = page.current);
+    this._service.getList();
   }
 
   onDelete(item: Course) {
@@ -44,8 +41,7 @@ export class CourseListComponent{
 
     onSearch(str: string): void {
       this.searchValue = str;
-      this.courses = [];
-      this.page.current = 0;
+      this.store.dispatch(new Init());
       this.onShowMore();
     }
 
@@ -58,6 +54,13 @@ export class CourseListComponent{
     }
 
     onShowMore() {
-      this._service.getList(this.searchValue, this.page.current + 1);
+      this._service.getList(this.searchValue, this.pageCurrent + 1);
+    }
+
+
+    ngOnDestroy() {
+      if(this.subscription) {
+        this.subscription.unsubscribe()
+      }
     }
 }

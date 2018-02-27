@@ -3,10 +3,11 @@ import { Http, Headers, Response  } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Store } from '@ngrx/store';
 
+
 import { User } from './user';
 import { settings } from '../settings';
-import { Info, IsAuth, AppState } from './actions';
-
+import { AppState  } from './appstate';
+import { Info, IsAuth } from './auth.reducer';
 
 Injectable()
 export class AuthService {
@@ -22,7 +23,7 @@ export class AuthService {
                     .then((res: Response) => {
                         let user = res.json();
                         localStorage.setItem(this._key, user.token);
-                        this.readUserInfo();
+                        this.isAuthorized();
                     });
   }
 
@@ -34,6 +35,9 @@ export class AuthService {
   isAuthorized(): void  {
     const isAuthorized = !!localStorage.getItem(this._key);
     this.store.dispatch(new IsAuth(isAuthorized));
+    if(isAuthorized) {
+      this.readUserInfo();
+    }
   }
 
   readUserInfo(): void {
@@ -47,9 +51,8 @@ export class AuthService {
     this.http.post(this._userInfooUrl, {}, options)
                     .toPromise()
                     .then((res: Response) => {
-                        let user = res.json();
-                        debugger;
-                        this.store.dispatch(new Info(user));
+                        let userInfo = res.json();
+                        this.store.dispatch(new Info(userInfo));
                     }, this.handleError);
   }
 
