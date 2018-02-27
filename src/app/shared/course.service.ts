@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Http, Headers, Response  } from '@angular/http';
+import { Store } from '@ngrx/store';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/filter';
@@ -13,26 +14,23 @@ import 'rxjs/add/operator/toPromise';
 
 import { Course } from './course';
 import { settings } from '../settings';
+import { AppState  } from './appstate';
+import { GetList } from './course.reducer';
 
 @Injectable()
 export class CourseService {
-  mainThread: BehaviorSubject<Course[]>;
   private _coursesUrl = `${settings.server}/courses`;
 
-  constructor(private http: Http) {
-    this.mainThread = new BehaviorSubject([]);
-  }
+  constructor(private http: Http, private store: Store<AppState>) { }
 
-  getList(str?: string, pageNumber?: number): Observable<any> {
+  getList(str?: string, pageNumber?: number): void {
     let url = this._coursesUrl + '?sort=date&count=10&page=' + (pageNumber || 1);
     url += str ? '&query='+str: '';
     this.http.get(url)
                     .toPromise()
                     .then((res: Response) => {
-                        this.mainThread.next(res.json());
+                        this.store.dispatch(new GetList(res.json()));
                     }, this.handleError);
-
-    return this.mainThread;
   }
 
   createItem(item: Course): Promise<any> {

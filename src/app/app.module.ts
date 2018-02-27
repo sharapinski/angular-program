@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
 import { IndexComponent } from './pages/index.component';
@@ -17,18 +18,21 @@ import { LoginComponent } from './pages/login/login.component';
 import { LoginPageComponent } from './pages/login-page.component';
 import { AddCourseComponent } from './pages/addcourse/addcourse.component';
 
-
 import { CourseService } from './shared/course.service';
 import { AuthService } from './shared/auth.service';
 import { BorderDirective } from './shared/border.directive';
 import { TimePipe } from './shared/time.pipe';
 import { SearchPipe } from './shared/search.pipe';
 import { OrderByPipe } from './shared/orderby.pipe';
+import { authReducer } from './shared/auth.reducer';
+import { courseListReducer } from './shared/course.reducer';
+
+import { metaReducers } from './shared/meta.reducer';
+
 
 import { DateComponent } from "./controls/date.component";
 import { ROUTES } from "./app.routes";
 import { NoContentComponent } from './pages/nocontent/nocontent.component';
-
 
 
 
@@ -58,7 +62,8 @@ import { NoContentComponent } from './pages/nocontent/nocontent.component';
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    StoreModule.forRoot({auth: authReducer, courselist: courseListReducer}, { metaReducers })
   ],
   providers: [
     CourseService,
